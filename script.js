@@ -1,21 +1,26 @@
-// script.js
+// Initialize categories array
+let categories = [];
 
-// Get references to the DOM elements
-const addCategoryButton = document.getElementById('addCategoryButton');
-const categoryList = document.getElementById('categoryList');
+// Function to display categories
+function displayCategories() {
+  const categoriesList = document.querySelector("#categories ul");
+  categoriesList.innerHTML = ""; // Clear the list
 
-// Function to add a new category
-function addCategory() {
-  const categoryName = prompt('Enter a category name:');
-  if (categoryName) {
-    // Create a new list item
-    const listItem = document.createElement('li');
-    listItem.textContent = categoryName;
-
-    // Append the new category to the list
-    categoryList.appendChild(listItem);
-  }
+  categories.forEach((category, index) => {
+    const li = document.createElement("li");
+    li.textContent = category;
+    categoriesList.appendChild(li);
+  });
 }
 
-// Add event listener to the button
-addCategoryButton.addEventListener('click', addCategory);
+// Add event listener for "Add Category" button
+document.getElementById("addCategory").addEventListener("click", () => {
+  const categoryName = prompt("Enter category name:");
+  if (categoryName) {
+    categories.push(categoryName);
+    displayCategories();
+  }
+});
+
+// Initial render
+displayCategories();
